@@ -1,0 +1,16 @@
+<form *ngIf="user" #f = "ngForm" (ngSubmit)="submitEditData(f.value)">
+      <div class="form-group">
+          
+        <label for="exampleInputUsername1">Username</label>
+        <input  type="username" name="username" ngModel class="form-control" id="exampleInputUsername1" placeholder="{{user.username}}">
+      </div>
+      <div class="form-group">
+        <label for="ImageUrl">ImageUrl</label>
+        <input type="ImageUrl" name="imgUrl" ngModel class="form-control" id="imgUrl" placeholder="{{user.pfp}}">
+      </div>
+      
+      
+      <button type="submit" class="btn btn-primary">Submit</button>
+
+
+</form>

@@ -1,0 +1,45 @@
+<div class="wrapper" *ngIf="post else undefinedPost">
+    <div class="left-col">
+        
+
+        <div class="post" *ngIf="post else undefinedPost">
+            <div class="info">
+                <div class="user">
+                    <div class="profile-pic"><img class="pfp" src="{{user.pfp}}" alt="Avatar"></div>
+                    <a href="/profile/{{user.username}}"><p class="username">{{user.username}}</p></a>
+                </div>
+                <img src="../assets/img/option.PNG" class="options" alt="">
+            </div>
+            <img src="{{post.imgUrl}}" class="post-image" alt="">
+            <div class="post-content">
+                <div class="reaction-wrapper">
+                    <img *ngIf="user.hasLiked==false; else elseBlock" class="icon" alt="" (click)="submitLike()" src="../assets/img/like.PNG">
+                    <ng-template #elseBlock><img class="icon" alt="" (click)="removeLike()" src="../assets/img/like2.png"></ng-template>
+                    <img src="../assets/img/comment.PNG" class="icon" alt="">
+                    <img src="../assets/img/send.PNG" class="icon" alt="">
+                    <img src="../assets/img/save.PNG" class="save icon" alt="">
+                </div>
+                <p class="likes">{{post.likes.length}} likes</p>
+                <p class="description"><span>{{user.username}} </span> {{post.title}}</p>
+                
+            </div>
+            <div class="comment-wrapper">
+                <img src="../assets/img/smile.PNG" class="icon" alt="">
+                <form #f = "ngForm" (ngSubmit)="submitComment(f.value)">
+                <input  name="comment" ngModel type="text" class="comment-box" placeholder="Add a comment">
+                <button type="submit" class="comment-btn">post</button>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+    <div class="allComments">
+        <p *ngFor="let comment of post.comments" class="description"><a href="/profile/{{comment[2]}}"><img src="{{comment[3]}}" class="pfpSmall" ><span>{{comment[2]}} </span></a> {{comment[1]}}</p>
+    </div>
+</div>
+
+
+
+<ng-template #undefinedPost>
+    <div>Uh Oh! Invalid ID! Post may have been deleted or has never existed!</div>
+   </ng-template>

@@ -1,0 +1,46 @@
+
+<section class="main">
+    <div *ngIf="posts else undefinedPost"> 
+        <div *ngFor="let post of posts">
+<div class="wrapper">
+    <div class="left-col">
+        
+
+        <div class="post">
+            <div class="info">
+                <div class="user">
+                    <div class="profile-pic"><img class="pfp" src="{{post.pfp}}" alt="Avatar"></div>
+                    <a href="/profile/{{post.author}}"><p class="username">{{post.author}}</p></a>
+                </div>
+                <img src="../assets/img/option.PNG" class="options" alt="">
+            </div>
+            <img (click)='postRedirect(post._id)'src="{{post.imgUrl}}" class="post-image" alt="">
+            <div class="post-content">
+                <div class="reaction-wrapper">
+                    <img src="../assets/img/like.PNG" class="icon" alt="">
+                    <img src="../assets/img/comment.PNG" class="icon" alt="">
+                    <img src="../assets/img/send.PNG" class="icon" alt="">
+                    <img src="../assets/img/save.PNG" class="save icon" alt="">
+                </div>
+                <p class="likes">1,012 likes</p>
+                <p class="description"><span>{{post.username}} </span> {{post.title}}</p>
+                
+            </div>
+            <div class="comment-wrapper">
+                <img src="../assets/img/smile.PNG" class="icon" alt="">
+                <input type="text" class="comment-box" placeholder="Add a comment">
+                <button class="comment-btn">post</button>
+            </div>
+        </div>
+        
+    </div>
+</div>
+</div>
+</div> 
+</section>
+
+
+
+<ng-template #undefinedPost>
+    <div>Uh oh! No posts to see! Go follow some people!</div>
+   </ng-template>
