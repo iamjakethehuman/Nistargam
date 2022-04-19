@@ -15,7 +15,10 @@ async function register(email, username, password){
         posts: [],
         verified: false,
         following: [],
-        pfp: "https://thebenclark.files.wordpress.com/2014/03/facebook-default-no-profile-pic.jpg"
+        pfp: "https://thebenclark.files.wordpress.com/2014/03/facebook-default-no-profile-pic.jpg",
+        receivedLikes: [],
+        savedPosts: [],
+        followers: [],
     })
     await user.save()
     return user;

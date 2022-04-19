@@ -16,7 +16,7 @@
 
 				<button *ngIf="isUser; else elseBlock" class="btn profile-edit-btn">Edit Profile</button>
 				<ng-template #elseBlock><button *ngIf="following; else elseBlock2"class="btn profile-edit-btn" (click)="unfollow(user._id)">Unfollow</button></ng-template>
-				<ng-template #elseBlock2><button class="btn profile-edit-btn" (click)="unfollow(user._id)">Follow</button></ng-template>
+				<ng-template #elseBlock2><button class="btn profile-edit-btn" (click)="follow(user._id)">Follow</button></ng-template>
 				
 
 				<button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>

@@ -17,8 +17,8 @@ export class AppService {
   createPost(data:any, token:any){
     return this.http.post<any>('/api/create', {data, token})
   }
-  getPostById(id: string){
-    return this.http.get<any>(`api/details/${id}`)
+  getPostById(id: string, data: any){
+    return this.http.post<any>(`api/details/${id}`, data)
   }
   getUserByUsername(username: string){
     return this.http.get<any>(`api/profile/${username}`)

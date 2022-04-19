@@ -1,6 +1,6 @@
 
 <section class="main">
-    <div *ngIf="posts else undefinedPost"> 
+    <div *ngIf="posts"> 
         <div *ngFor="let post of posts">
 <div class="wrapper">
     <div class="left-col">
@@ -17,12 +17,13 @@
             <img (click)='postRedirect(post._id)'src="{{post.imgUrl}}" class="post-image" alt="">
             <div class="post-content">
                 <div class="reaction-wrapper">
-                    <img src="../assets/img/like.PNG" class="icon" alt="">
+                    <img *ngIf="post.hasLiked; else elseBlock" src="../assets/img/like2.png" class="icon" alt="" (click)="removeLike(post._id, post.number)">
+                    <ng-template #elseBlock><img src="../assets/img/like.PNG" class="icon" alt="" (click)="submitLike(post._id, post.number)"></ng-template>
                     <img src="../assets/img/comment.PNG" class="icon" alt="">
                     <img src="../assets/img/send.PNG" class="icon" alt="">
                     <img src="../assets/img/save.PNG" class="save icon" alt="">
                 </div>
-                <p class="likes">1,012 likes</p>
+                <p class="likes">{{post.likes.length}} likes</p>
                 <p class="description"><span>{{post.username}} </span> {{post.title}}</p>
                 
             </div>
@@ -43,6 +44,10 @@
 
 
 
-<ng-template #undefinedPost>
-    <div>Uh oh! No posts to see! Go follow some people!</div>
-   </ng-template>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div *ngIf="arePosts">Uh oh! No posts to see! Go follow some people!</div>

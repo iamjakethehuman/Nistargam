@@ -42,11 +42,12 @@ router.post('/create', async (req, res) => {
     }
 })
 
-router.get('/details/:id', async (req, res) => { 
+router.post('/details/:id', async (req, res) => { 
     try{
         console.log(req.params)
     const id = req.params.id
-    
+    const token = req.body.token
+        const payload = jwt.verify(token, 'test123')
     const post = postViewModel(await getPostById(id))
     if (post.comments)
     for(let comment of post.comments){
@@ -56,9 +57,10 @@ router.get('/details/:id', async (req, res) => {
     }
     
     const user = userViewModel(await getUserById(post.authorId))
-    user.hasLiked = false
-    if (post.likes.includes(user._id)){user.hasLiked = true}
-    res.json({post, user})
+    const user2 = userViewModel(await getUserById(payload._id))
+    user2.hasLiked = false
+    if (post.likes.includes(user2._id)){user2.hasLiked = true}
+    res.json({post, user, user2})
     }
     catch (err){
         console.log(err)
@@ -145,6 +147,8 @@ router.post('/home', async (req, res) => {
         for (let post of posts){
             const obj = postViewModel(await getPostById(post.toString()))
             obj.pfp = userr.pfp
+            obj.userHasLiked = false
+            if (obj.likes.includes(payload._id)){obj.hasLiked = true;}
             result.push(obj)
         }
         
@@ -153,6 +157,9 @@ router.post('/home', async (req, res) => {
         
         return b.creationDate - a.creationDate
     })
+    for (let i = 0; i < result.length; i++){
+        result[i].number = [i]
+    }
     
     
     

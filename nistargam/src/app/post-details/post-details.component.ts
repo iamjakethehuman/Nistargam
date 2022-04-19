@@ -16,6 +16,8 @@ export class PostDetailsComponent implements OnInit {
   user: any | any
   id: any | any
   comments: any | any
+  user2: any | any
+
   ngOnInit(): void {
     const idFromRoute = this.route.snapshot.paramMap.get('id');
     this.post = this.getPost(idFromRoute)
@@ -23,11 +25,12 @@ export class PostDetailsComponent implements OnInit {
   }
 
   getPost(id:any): any{
-    this.service.getPostById(id).subscribe((res) => { 
+    this.service.getPostById(id, {token: localStorage.getItem('token')}).subscribe((res) => { 
         
         console.log(res)
         this.post = res.post
         this.user = res.user
+        this.user2 = res.user2
         return res
     })
   }

@@ -13,8 +13,8 @@
             <img src="{{post.imgUrl}}" class="post-image" alt="">
             <div class="post-content">
                 <div class="reaction-wrapper">
-                    <img *ngIf="user.hasLiked==false; else elseBlock" class="icon" alt="" (click)="submitLike()" src="../assets/img/like.PNG">
-                    <ng-template #elseBlock><img class="icon" alt="" (click)="removeLike()" src="../assets/img/like2.png"></ng-template>
+                    <img *ngIf="user2.hasLiked; else elseBlock" class="icon" alt="" (click)="removeLike()" src="../assets/img/like2.png">
+                    <ng-template #elseBlock><img class="icon" alt="" (click)="submitLike()" src="../assets/img/like.PNG"></ng-template>
                     <img src="../assets/img/comment.PNG" class="icon" alt="">
                     <img src="../assets/img/send.PNG" class="icon" alt="">
                     <img src="../assets/img/save.PNG" class="save icon" alt="">

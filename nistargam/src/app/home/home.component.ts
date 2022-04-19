@@ -12,9 +12,12 @@ export class HomeComponent implements OnInit {
   constructor(private service: AppService, private router: Router) { }
 
   posts : any | undefined
+  arePosts : boolean | undefined
 
   ngOnInit(): void {
     this.getHomePosts()
+    if (this.posts == []){this.arePosts = false}
+    else {this.arePosts = true}
   }
 
   getHomePosts(){
@@ -42,6 +45,22 @@ export class HomeComponent implements OnInit {
     
     this.router.navigate([`details/${data}`])
 
+  }
+
+  submitLike(id: any, number : any){
+    console.log('clicked submitlike')
+    this.service.submitLike({id: id, token: localStorage.getItem('token')}).subscribe((res) => { 
+      console.warn(res)
+      this.posts[number].hasLiked = true
+    })
+  }
+  removeLike(id: any, number: any){
+    console.log('clicked remove like')
+    this.service.removeLike({id: id, token: localStorage.getItem('token')}).subscribe((res) => { 
+      console.warn(res)
+      this.posts[number].hasLiked = false
+      //window.location.reload()
+    })
   }
 
 }
