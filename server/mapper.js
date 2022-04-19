@@ -7,7 +7,8 @@ function postViewModel(post) {
         author: post.author,
         number: post.number,
         authorId: post.authorId,
-        likes: post.likes
+        likes: post.likes,
+        creationDate: post.creationDate
     }
 
 }
@@ -19,7 +20,8 @@ function userViewModel(user) {
         pfp: user.pfp,
         verified: user.verified,
         posts: user.posts,
-        following: user.following
+        following: user.following,
+        followers: user.followers
         
     }
 

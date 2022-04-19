@@ -10,7 +10,7 @@ const postSchema = new Schema({
         comments: [[Schema.Types.Mixed]],
         number: {type: Number, required: true},
         likes: [{type: ObjectId, ref:'User' }],
-        
+        creationDate: {type: Date, required: true}
     })
 
 /* userSchema.index({email: 1}, {

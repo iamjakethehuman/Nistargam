@@ -42,8 +42,9 @@ async function createPost(title, imgUrl, username, id){
         imgUrl,
         author: username,
         authorId: id,
-        comments: [[]],
-        number: number
+        comments: [],
+        number: number,
+        creationDate: new Date()
     })
     await post.save()
     const user = await getUserById(id)

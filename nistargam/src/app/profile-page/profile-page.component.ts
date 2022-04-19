@@ -11,10 +11,11 @@ export class ProfilePageComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private service: AppService) { }
   
-  user: any | undefined
-  posts: any | undefined
-  isUser: boolean | undefined
-  username: any | undefined
+  user: any | any
+  posts: any | any
+  isUser: boolean | any
+  following: boolean | any
+  username: any | any
 
   ngOnInit(): void {
     const username = this.route.snapshot.paramMap.get('username');
@@ -42,6 +43,18 @@ export class ProfilePageComponent implements OnInit {
     this.service.followUser(data).subscribe((res) => { 
       console.warn(res)
     })
+    window.location.reload()
+  }
+  unfollow(id: any){
+    const data = {
+      id,
+      token: localStorage.getItem('token')
+    }
+    console.log('unfollowed')
+    this.service.unfollowUser(data).subscribe((res) => { 
+      console.warn(res)
+    })
+    window.location.reload()
   }
   checkIfUser(){
     const data = {
@@ -50,7 +63,8 @@ export class ProfilePageComponent implements OnInit {
     }
     this.service.checkIfUser(data).subscribe((res: any) => { 
       console.log(res)
-      this.isUser = res
+      this.isUser = res.ownership
+      this.following = res.following
     })
   }
   

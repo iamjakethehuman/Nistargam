@@ -9,12 +9,14 @@ const userSchema = new Schema({
         verified: {type: Boolean},
         posts: [{type: ObjectId, ref:'Post' }],
         following: [{type: ObjectId, ref:'User' }],
+        followers: [{type: ObjectId, ref:'User'}],
         pfp: {type: String, required: true},
         savedPosts: [{type: ObjectId, ref: 'Post'}],
         receivedLikes: [{
             user: {type: ObjectId, ref: 'User'},
             postId: {type: ObjectId, ref: 'Post'}
         }]
+
         
     })
 

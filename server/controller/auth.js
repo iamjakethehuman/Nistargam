@@ -48,7 +48,7 @@ router.get('/details/:id', async (req, res) => {
     const id = req.params.id
     
     const post = postViewModel(await getPostById(id))
-    
+    if (post.comments)
     for(let comment of post.comments){
        const user = userViewModel(await getUserById(comment[0]))
        comment.push(user.username)
@@ -88,10 +88,13 @@ router.post('/follow', async (req, res) => {
         const token = req.body.token
     const payload = jwt.verify(token, 'test123')
     const user = await getUserById(payload._id)
+    const user2 = await getUserById(req.body.id)
     if (payload._id == req.body.id) { 
         throw new Error ('cannot follow yourself!')
     }
-    user.following.push(req.body.id)
+    if (!user.following.includes(req.body.id)){user.following.push(req.body.id)}
+    if (!user2.followers.includes(payload._id)){user2.followers.push(payload._id)}
+    await user2.save()
     await user.save()
     res.json({message: "successfull following!"})
 
@@ -101,6 +104,29 @@ router.post('/follow', async (req, res) => {
     }
 
 })
+
+router.post('/unfollow', async (req, res) => { 
+    try{
+        const token = req.body.token
+    const payload = jwt.verify(token, 'test123')
+    const user = await getUserById(payload._id)
+    const user2 = await getUserById(req.body.id)
+    if (payload._id == req.body.id) { 
+        throw new Error ('cannot follow yourself!')
+    }
+    if (user.following.includes(req.body.id)){user.following.splice(user.following.indexOf(req.body.id), 1)}
+    if (user2.followers.includes(payload._id)){user2.followers.splice(user2.followers.indexOf(payload._id),1)}
+    await user2.save()
+    await user.save()
+    res.json({message: "successfull un  following!"})
+
+    }
+    catch (err){
+        console.log(err)
+    }
+
+})
+
 
 router.post('/home', async (req, res) => { 
     try{
@@ -124,7 +150,8 @@ router.post('/home', async (req, res) => {
         
     }
     result.sort((a, b) => { 
-        return b.number - a.number
+        
+        return b.creationDate - a.creationDate
     })
     
     
@@ -156,7 +183,15 @@ router.post('/checkOwnership', async (req, res) => {
         const token = req.body.token
     console.log(req.body)
     const payload = jwt.verify(token, 'test123')
-    res.json(payload.username == req.body.username)
+    let ownership = false
+    let following = false
+    const profileUser =userViewModel( await getUserByUsername(req.body.username))
+    const user2 = payload._id
+    console.log(user2)
+    console.log(profileUser)
+    if (payload.username == req.body.username) {ownership = true;}
+    if (profileUser.followers.includes(user2)) {following = true;}
+    res.json({ownership, following})
     }
     catch (err) { 
         console.log(err)
@@ -227,10 +262,11 @@ router.post('/removeLike', async (req, res) => {
     }
 })
 
-router.get('/likes', async (req, res) => { 
+router.post('/likes', async (req, res) => { 
     try{
-        console.log('daaa')
-        console.log(req.headers)
+        const token = req.body.token
+        const payload = jwt.verify(token, 'test123')
+
         res.send({message: "disliked successfully"})
     }
     catch (err) {

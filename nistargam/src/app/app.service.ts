@@ -26,6 +26,9 @@ export class AppService {
   followUser(data: any){
     return this.http.post<any>('/api/follow', data)
   }
+  unfollowUser(data: any){
+    return this.http.post<any>('/api/unfollow', data)
+  }
   getHomePostsByToken(data: any){ 
     return this.http.post<any>('/api/home', data)
   }
