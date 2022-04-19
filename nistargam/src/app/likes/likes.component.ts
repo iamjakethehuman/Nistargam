@@ -14,10 +14,15 @@ export class LikesComponent implements OnInit {
     this.getRecentLikes()
   }
 
+  likes: any | any
+
   getRecentLikes(){
     console.log('works')
-    this.service.getLikes(localStorage.getItem('token')).subscribe((res) => { 
+    const token = localStorage.getItem('token')
+    console.log(token)
+    this.service.getLikes({token: token}).subscribe((res) => { 
       console.warn(res)
+      this.likes = res
     })
   }
 

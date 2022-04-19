@@ -28,8 +28,10 @@
             </div>
             <div class="comment-wrapper">
                 <img src="../assets/img/smile.PNG" class="icon" alt="">
-                <input type="text" class="comment-box" placeholder="Add a comment">
-                <button class="comment-btn">post</button>
+                <form #f = "ngForm" (ngSubmit)="submitComment(f.value, post._id)">
+                    <input  name="comment" ngModel type="text" class="comment-box" placeholder="Add a comment">
+                    <button type="submit" class="comment-btn">post</button>
+                    </form>
             </div>
         </div>
         

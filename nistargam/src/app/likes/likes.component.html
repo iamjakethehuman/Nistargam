@@ -1,2 +1,8 @@
 <p>likes works!</p>
 <button (click)="getRecentLikes()">kekw</button>
+
+<div class="wrapper">
+<div class="allComments">
+    <p *ngFor="let like of likes" class="description"><a href="/profile/{{like.username}}"><span>{{like.username}} </span></a><span>liked your photo </span> <a href="/details/{{like.post._id}}"><img class="pfpSmall"src="{{like.post.imgUrl}}"></a></p>
+</div>
+</div>

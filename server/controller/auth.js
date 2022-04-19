@@ -265,9 +265,17 @@ router.post('/removeLike', async (req, res) => {
 router.post('/likes', async (req, res) => { 
     try{
         const token = req.body.token
+        console.log(req.body)
         const payload = jwt.verify(token, 'test123')
-
-        res.send({message: "disliked successfully"})
+        const user = userViewModel(await getUserById(payload._id))
+        const likes = user.receivedLikes
+        const result = []
+        for (let like of likes){
+            let username = userViewModel(await getUserById(like.user)).username
+            let post = postViewModel(await getPostById(like.postId))
+            result.push({username, post})
+        }
+        res.json(result)
     }
     catch (err) {
         console.log(err)

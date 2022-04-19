@@ -12,7 +12,7 @@ async function start(){
     
     app.use(bp.json())
     app.use(bp.urlencoded({ extended: true }))
-
+    app.use('/static', express.static('static'))
     app.use(express.urlencoded({extended: true}))
     
     await databaseConfig(app)

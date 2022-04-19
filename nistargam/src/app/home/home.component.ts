@@ -25,12 +25,21 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  submitComment(){
-    
+  submitComment(data:any, id: any): any{
+    const send = { 
+      token: localStorage.getItem('token'),
+      postId: id,
+      comment: data.comment
+    }
+    this.service.submitCommentToPost(send).subscribe((res) => { 
+        
+      console.log(res)
+      this.postRedirect(id)
+  })
   }
 
   postRedirect(data: any){
-    console.log('test')
+    
     this.router.navigate([`details/${data}`])
 
   }

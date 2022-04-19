@@ -21,7 +21,8 @@ function userViewModel(user) {
         verified: user.verified,
         posts: user.posts,
         following: user.following,
-        followers: user.followers
+        followers: user.followers,
+        receivedLikes: user.receivedLikes
         
     }
 
