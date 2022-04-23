@@ -19,6 +19,7 @@ async function register(email, username, password){
         receivedLikes: [],
         savedPosts: [],
         followers: [],
+        bio: 'My first bio!'
     })
     await user.save()
     return user;
@@ -42,7 +43,7 @@ async function createPost(title, imgUrl, username, id){
     const number = (await Post.find({})).length
     const post = new Post({
         title,
-        imgUrl,
+        imgUrl: 'http://localhost:3000/' + imgUrl,
         author: username,
         authorId: id,
         comments: [],

@@ -15,7 +15,8 @@ const userSchema = new Schema({
         receivedLikes: [{
             user: {type: ObjectId, ref: 'User'},
             postId: {type: ObjectId, ref: 'Post'}
-        }]
+        }],
+        bio: {type: String}
 
         
     })

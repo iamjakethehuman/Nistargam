@@ -22,6 +22,7 @@ export class PostDetailsComponent implements OnInit {
     const idFromRoute = this.route.snapshot.paramMap.get('id');
     this.post = this.getPost(idFromRoute)
     this.id = idFromRoute
+    this.service.isNotLogged()
   }
 
   getPost(id:any): any{

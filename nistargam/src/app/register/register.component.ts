@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppService } from '../app.service';
 
 @Component({
@@ -8,9 +9,10 @@ import { AppService } from '../app.service';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private service: AppService) { }
+  constructor(private service: AppService, private router: Router) { }
 
   ngOnInit(): void {
+    this.isLogged()
   }
 
 
@@ -18,5 +20,8 @@ export class RegisterComponent implements OnInit {
     this.service.registerUser(data).subscribe((res) => {
       localStorage.setItem('token', res.token)
     })
+  }
+  isLogged(){
+    if (localStorage.getItem('token') != undefined) {this.router.navigate(['/home'])}
   }
 }

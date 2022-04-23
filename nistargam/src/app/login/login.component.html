@@ -1,16 +1,27 @@
+<link href="https://fonts.googleapis.com/css?family=Indie+Flower|Overpass+Mono" rel="stylesheet">
+
+
 <form #login = "ngForm" (ngSubmit)="submitLoginData(login.value)">
-    <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" name="email" ngModel class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+<div id="wrapper">
+  <div class="main-content">
+    <div class="header">
+      <img src="../assets/img/logo.png" />
+    </div>
+    <div class="l-part">
+      <input type="text" name="email" ngModel placeholder="Email" class="input-1" />
+      <div class="overlap-text">
+        <input name="password" ngModel type="password" placeholder="Password" class="input-2" />
+        
       </div>
-      
-      <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" name="password" ngModel class="form-control" id="exampleInputPassword1" placeholder="Password">
-      </div>
-      
-      <button type="submit" class="btn btn-primary">Submit</button>
-
-
+      <input type="submit" value="Log in" class="btn" />
+    </div>
+  </div>
+  <div class="sub-content">
+    <div class="s-part">
+      Don't have an account?<a routerLink="/register">Sign up</a>
+    </div>
+  </div>
+</div>
 </form>
+
+

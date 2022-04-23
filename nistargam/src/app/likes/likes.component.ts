@@ -12,6 +12,7 @@ export class LikesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRecentLikes()
+    this.service.isNotLogged()
   }
 
   likes: any | any

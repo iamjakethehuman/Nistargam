@@ -15,9 +15,11 @@ export class HomeComponent implements OnInit {
   arePosts : boolean | undefined
 
   ngOnInit(): void {
+    this.service.isNotLogged()
     this.getHomePosts()
     if (this.posts == []){this.arePosts = false}
     else {this.arePosts = true}
+   
   }
 
   getHomePosts(){

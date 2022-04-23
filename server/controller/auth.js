@@ -3,6 +3,19 @@ var jwt = require('jsonwebtoken');
 const { postViewModel, userViewModel } = require('../mapper');
 const mongoose = require('mongoose')
 const { register, login, createPost, getPostById, getUserById, getUserByUsername, addComment, editUser } = require('../services/userServices');
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './uploads/')
+    },
+    filename: function (req, file, cb) {
+        
+        cb(null, Date.now() + file.originalname)
+    }
+})
+
+const upload = multer({storage: storage})
 
 router.post('/register', async (req, res) => { 
     try {const user = await register(req.body.email, req.body.username, req.body.password)
@@ -22,19 +35,20 @@ router.post('/login', async (req, res) => {
     }
     catch (err){
         console.log(err)
-        return res.json({message: err})
+        return res.json({message: 'login failed'})
     }
 })
 
-router.post('/create', async (req, res) => {
+router.post('/create', upload.single('img'), async (req, res) => {
     try {
+        
         const token = req.body.token
         const payload = jwt.verify(token, 'test123')
         const creatorUsername = payload.username
         const creatorId = payload._id
-        const data = req.body.data
-        console.log(req.body)
-        await createPost(data.title, data.imgUrl, creatorUsername, creatorId)
+        const data = req.body
+        
+        await createPost(data.title, req.file.path, creatorUsername, creatorId)
         return res.status(200).json({message: "Post Created"})
     }
     catch (err) { 
@@ -287,6 +301,11 @@ router.post('/likes', async (req, res) => {
     catch (err) {
         console.log(err)
     }
+})
+
+router.post('/test', upload.single('pmi'), (req, res) => { 
+    console.log(req)
+    res.json({message: req.file})
 })
 
 

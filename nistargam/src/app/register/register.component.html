@@ -2,22 +2,26 @@
 <br>
 <br>
 
-<form #f = "ngForm" (ngSubmit)="submitRegisterData(f.value)">
-    <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" name="email" ngModel class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputUsername1">Username</label>
-        <input type="username" name="username" ngModel class="form-control" id="exampleInputUsername1" placeholder="Username">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" name="password" ngModel class="form-control" id="exampleInputPassword1" placeholder="Password">
-      </div>
+
+
+<main>
+  <div class="page">
+    <div class="header">
+      <img src="../assets/img/logo.png" />
+    </div>
+      <div class="container">
+        <form #f = "ngForm" (ngSubmit)="submitRegisterData(f.value)">
+          <input type="text" name="email" ngModel placeholder="Email">
+          <input type="text" name="username" ngModel placeholder="Username">
+          <input type="password" name="password" ngModel placeholder="Password">
+          <button type="submit" class="btn btn-primary">Sign up</button>
+        </form>
       
-      <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+  </div>
+  <div class="option">
+     <p>Have an account? <a routerLink="/login">Log in</a></p>
+  </div>
+  
+</main>
 
-
-</form>

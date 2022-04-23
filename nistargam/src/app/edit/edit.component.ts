@@ -13,6 +13,7 @@ export class EditComponent implements OnInit {
   constructor(private service: AppService) { }
 
   ngOnInit(): void {
+    this.service.isNotLogged()
     this.sendForEdit()
   }
 

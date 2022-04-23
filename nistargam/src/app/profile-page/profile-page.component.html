@@ -35,7 +35,7 @@
 
 			<div class="profile-bio">
 
-				<p><span class="profile-real-name"></span> Lorem ipsum dolor sit, amet consectetur adipisicing elit 📷✈️🏕️</p>
+				<p><span class="profile-real-name"></span> {{user.bio}}</p>
 
 			</div>
 
@@ -55,7 +55,7 @@
 
 			<div *ngFor="let post of posts" class="gallery-item" tabindex="0">
 
-				<a href="/details/{{post._id}}" ><img src="{{post.imgUrl}}" class="gallery-image" alt="">
+				<a routerLink="/details/{{post._id}}" ><img src="{{post.imgUrl}}" class="gallery-image" alt="">
 
 				<div class="gallery-item-info">
 
@@ -91,11 +91,11 @@
         <h3>{{user.username}}</h3><button *ngIf="!isUser else notUser" (click)="follow(user._id)">follow</button>
         <img src={{user.pfp}}>
         <ng-template #notUser>
-            <a href = "edit"><button>Edit</button></a>
+            <a routerLink = "edit"><button>Edit</button></a>
            </ng-template>
     </div>
     <div>
-        <li *ngFor="let post of posts"><a href="/details/{{post._id}}"><img src={{post.imgUrl}}></a></li>
+        <li *ngFor="let post of posts"><a routerLink="/details/{{post._id}}"><img src={{post.imgUrl}}></a></li>
     </div>
 </div>
 

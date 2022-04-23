@@ -29,7 +29,8 @@ export class ProfilePageComponent implements OnInit {
     this.service.getUserByUsername(username).subscribe((res)=> { 
       console.warn(res)
       this.user = res.user
-      this.posts = res.posts
+      this.posts = res.posts.reverse()
+      
       console.log(this.posts)
       return res
     })
