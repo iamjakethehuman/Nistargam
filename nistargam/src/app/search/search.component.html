@@ -1,0 +1,14 @@
+<br><br><br><br>
+
+<input type="text" placeholder="Search by Username" (change)="search($event)">
+<div *ngIf="users; else elseBlock" class="wrapper">
+    <div *ngFor="let user of users" class="allComments">
+        <img class="pfpSmall" routerLink="/profile/{{user.username}}" src="{{user.pfp}}">
+        <p class="username" routerLink="/profile/{{user.username}}">{{user.username}}</p>
+        <p>{{user.bio}}</p>
+    </div>
+</div>
+
+<ng-template #elseBlock>
+    <p>There are no users matching your search</p>
+</ng-template>
