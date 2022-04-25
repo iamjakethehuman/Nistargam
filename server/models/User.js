@@ -3,8 +3,8 @@ const {Schema, model, Types:{ObjectId}} = require('mongoose')
 //TO DO change user model according to exam description 
 // TO DO ADD VALIDATION 
 const userSchema = new Schema({
-        email: {type: String, required: true},
-        username: {type: String, required: true},
+        email: {type: String, required: true, match: [/.+@.+/g]},
+        username: {type: String, required: true, minlength: 4, maxlength: 19 },
         hashedPassword: {type: String, required: true},
         verified: {type: Boolean},
         posts: [{type: ObjectId, ref:'Post' }],

@@ -97,9 +97,11 @@ async function addComment(comment, postId){
 
 async function editUser(data){
     const user = await getUserById(data.id)
-    user.pfp = data.pfp
+    if (data.pfp){user.pfp = 'http://localhost:3000/' + data.pfp}
     user.username = data.username
+    user.bio = data.bio
     await user.save()
+    return user
 }
 
 

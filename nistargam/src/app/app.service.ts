@@ -57,4 +57,7 @@ export class AppService {
   isNotLogged(){
     if (localStorage.getItem('token') == undefined) {this.router.navigate(['/login'])}
   }
+  searchUsers(data: any){
+    return this.http.post<any>('/api/search', data)
+  }
 }

@@ -3,15 +3,15 @@
 	<nav class="navbar">
 		<div class="nav-wrapper">
 			<a href="/home" class="brand-img"><img src="../assets/img/logo.png" class="brand-img" alt=""></a>
-			<input type="text" class="search-box" placeholder="search">
+			<input type="text" class="search-box" placeholder="search" (click)="goToSearch()">
 			<div class="nav-items">
 				<img src="../assets/img/home.PNG" class="icon" alt="">
 
-				<img src="../assets/img/add.PNG" class="icon" alt="">
-				<img src="../assets/img/explore.PNG" class="icon" alt="">
+				<img src="../assets/img/add.PNG" routerLink="/create" class="icon" alt="">
+				
 				<img src="../assets/img/logout.png" class = 'icon' alt = "" (click)="logout()">
 				<a href="/likes"> <img src="../assets/img/like.PNG"  class="icon" alt=""> </a>
-				<div class="icon user-profile"></div>
+				<a href="/profile/{{username}}"><div class="icon user-profile" ></div></a>
 			</div>
 		</div>
 	</nav>

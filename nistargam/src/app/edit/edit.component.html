@@ -1,16 +1,26 @@
-<form *ngIf="user" #f = "ngForm" (ngSubmit)="submitEditData(f.value)">
-      <div class="form-group">
-          
-        <label for="exampleInputUsername1">Username</label>
-        <input  type="username" name="username" ngModel class="form-control" id="exampleInputUsername1" placeholder="{{user.username}}">
-      </div>
-      <div class="form-group">
-        <label for="ImageUrl">ImageUrl</label>
-        <input type="ImageUrl" name="imgUrl" ngModel class="form-control" id="imgUrl" placeholder="{{user.pfp}}">
-      </div>
-      
-      
-      <button type="submit" class="btn btn-primary">Submit</button>
+<br>
+<br>
+<br>
 
 
-</form>
+
+<main>
+  <div class="page" *ngIf="isDataLoaded">
+    <div class="header">
+      <img src="../assets/img/logo.png" />
+      
+    </div>
+      <div class="container">
+        <form #f = "ngForm" (ngSubmit)="submitEditData(f.value)">
+          <input type="text" name="email" ngModel="{{user.email}}" placeholder="Email" > 
+          <input type="text" name="username" ngModel="{{user.username}}" placeholder="Username">
+          <input type="text" class='bio' name="bio" ngModel="{{user.bio}}" placeholder="Bio">
+          <input type="file" (change)="onFileSelected($event)">
+          <button type="submit" class="btn btn-primary">Submit Edit</button>
+        </form>
+      
+      </div>
+  </div>
+  
+  
+</main>

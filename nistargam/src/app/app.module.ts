@@ -14,7 +14,8 @@ import { CreateComponent } from './create/create.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { EditComponent } from './edit/edit.component';
-import { LikesComponent } from './likes/likes.component'
+import { LikesComponent } from './likes/likes.component';
+import { SearchComponent } from './search/search.component'
 
 const routes: Routes = [
   {
@@ -53,6 +54,10 @@ const routes: Routes = [
   {
     path: 'likes',
     component: LikesComponent
+  },
+  {
+    path: 'search',
+    component: SearchComponent
   }
 ]
 
@@ -67,7 +72,8 @@ const routes: Routes = [
     PostDetailsComponent,
     ProfilePageComponent,
     EditComponent,
-    LikesComponent
+    LikesComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

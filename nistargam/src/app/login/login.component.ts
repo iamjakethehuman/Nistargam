@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   submitLoginData(data:any){
     this.service.loginUser(data).subscribe((res)=> { 
-      if (res.token) {localStorage.setItem('token', res.token); this.router.navigate(['/home'])}
+      if (res.token) {localStorage.setItem('token', res.token); localStorage.setItem('username', res.username) ;this.router.navigate(['/home'])}
       else {window.alert('Incorrect data! Try again!')}
       
     })

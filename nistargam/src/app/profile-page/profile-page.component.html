@@ -14,7 +14,7 @@
 
 				<h1 class="profile-user-name">{{user.username}}</h1>
 
-				<button *ngIf="isUser; else elseBlock" class="btn profile-edit-btn">Edit Profile</button>
+				<button *ngIf="isUser; else elseBlock" class="btn profile-edit-btn" routerLink="/edit">Edit Profile</button>
 				<ng-template #elseBlock><button *ngIf="following; else elseBlock2"class="btn profile-edit-btn" (click)="unfollow(user._id)">Unfollow</button></ng-template>
 				<ng-template #elseBlock2><button class="btn profile-edit-btn" (click)="follow(user._id)">Follow</button></ng-template>
 				
@@ -86,18 +86,7 @@
 
 
 
-<div *ngIf="user else noUser">
-    <div>
-        <h3>{{user.username}}</h3><button *ngIf="!isUser else notUser" (click)="follow(user._id)">follow</button>
-        <img src={{user.pfp}}>
-        <ng-template #notUser>
-            <a routerLink = "edit"><button>Edit</button></a>
-           </ng-template>
-    </div>
-    <div>
-        <li *ngFor="let post of posts"><a routerLink="/details/{{post._id}}"><img src={{post.imgUrl}}></a></li>
-    </div>
-</div>
+
 
 <ng-template #noUser>
     <div><p>Dang! Invalid username!</p></div>

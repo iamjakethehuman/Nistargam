@@ -3,7 +3,9 @@ var jwt = require('jsonwebtoken');
 const { postViewModel, userViewModel } = require('../mapper');
 const mongoose = require('mongoose')
 const { register, login, createPost, getPostById, getUserById, getUserByUsername, addComment, editUser } = require('../services/userServices');
-const multer = require('multer')
+const multer = require('multer');
+const req = require('express/lib/request');
+const User = require('../models/User');
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -20,7 +22,8 @@ const upload = multer({storage: storage})
 router.post('/register', async (req, res) => { 
     try {const user = await register(req.body.email, req.body.username, req.body.password)
     var token = jwt.sign(JSON.stringify(user), 'test123')
-    return res.status(200).send({token})
+    const username = user.username
+    return res.status(200).send({token, username})
     }
     catch (err){ 
         console.log(err)
@@ -31,7 +34,8 @@ router.post('/login', async (req, res) => {
     try{
         const user = await login(req.body.email, req.body.password)
         var token = jwt.sign(JSON.stringify(user), 'test123')
-        return res.status(200).send({token})
+        const username = user.username
+        return res.status(200).send({token, username})
     }
     catch (err){
         console.log(err)
@@ -230,15 +234,20 @@ router.post('/editProfile', async (req, res) => {
     }
 })
 
-router.post('/editProfileInfo', async (req, res) => { 
+router.post('/editProfileInfo', upload.single('img'), async (req, res) => { 
     try {
         const token = req.body.token
         console.log(req.body)
         const payload = jwt.verify(token, 'test123')
         const data = req.body
         data.id = payload._id
-        await editUser(data)
-        res.send({message: "user edited!"})
+        console.log(req.file)
+        if (data.newPfp == 'true')
+        {data.pfp = req.file.path}
+        const newUser = await editUser(data)
+        console.log(newUser)
+        const newJwt = jwt.sign(JSON.stringify(newUser), 'test123')
+        res.send({message: "user edited!", token: newJwt, username: data.username})
 
     }
     catch (err) { 
@@ -306,6 +315,18 @@ router.post('/likes', async (req, res) => {
 router.post('/test', upload.single('pmi'), (req, res) => { 
     console.log(req)
     res.json({message: req.file})
+})
+
+router.post('/search', async (req, res) => { 
+    try {
+        const param = req.body.param
+        const regex = new RegExp(param, "g")
+        const users = await User.find({username: {$regex: regex}})
+        res.json({users: users})
+    }
+    catch (err){ 
+        console.log(err)
+    }
 })
 
 
